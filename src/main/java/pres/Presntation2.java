@@ -8,6 +8,7 @@ import metier.MetierImpl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -25,7 +26,11 @@ public class Presntation2 {
         String metierClassName = scanner.nextLine();
         Class cMetier =  Class.forName(metierClassName);
 
-        IMetier metier = (IMetier) cMetier.getConstructor(IDao.class).newInstance(dao);
+       IMetier metier = (IMetier) cMetier.getConstructor(IDao.class).newInstance(dao);
+
+        // IMetier metier = (IMetier) cMetier.getConstructor().newInstance();
+        // Method setDao = cMetier.getDeclaredMethod("setDao", IDao.class);
+        // setDao.invoke(metier, dao);
 
         System.out.println("Resultat : " + metier.calcul());
     }
